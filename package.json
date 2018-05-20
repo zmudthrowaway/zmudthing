@@ -1,0 +1,24 @@
+{
+  "name": "socketeer",
+  "version": "1.0.0",
+  "description": "Zombie sockets-to-telnet webapp",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zmudthrowaway/"
+  },
+  "keywords": [
+    "zombiemud"
+  ],
+  "author": "weishaupt",
+  "license": "do whatever the fuck you want with it",
+  "dependencies": {
+    "express": "^4.16.3",
+    "socket.io": "^2.0.4",
+    "text-encoding": "^0.6.4"
+  }
+}

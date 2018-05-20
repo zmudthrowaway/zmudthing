@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <script src="index.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="ansi_up.js"></script>
+        <link rel="stylesheet" href="index.css"/>
+    </head>
+    <body>
+        <pre>
+            <div class="serverOutput" id="server" height="250px" width="400px" readonly="true"></div>
+        </pre>
+        <label>autoscroll<input id="autoScrollCheckBox" type="checkbox" checked="true"></label>
+        <textarea class="clientInput" id="user" ></textarea>
+        
+        <div id='divCustom' class='divCustom'>
+            <div>Your customizations </div>
+            <div id='divCustomBoxes' class='customBoxes'>
+                <div id='divMacros' class='customBox macros'></div>
+                <div id='divAliases' class='customBox aliases'></div>
+                <div id='divSubs' class='customBox subs'></div>
+                <div id='divTriggers' class='customBox triggers'></div>
+            </div>
+            <input type='button' value='Save changes' title="These are saved to your browser only!" onclick='saveCustomizationsInStorage()'>
+        </div>
+        <br>
+        <div id='instructions' class='instructions'>
+                <b> NOTE: If you use this but did not set it up yourself, whoever is running the server can see your password!</b>
+                <br><br>
+            This is a web client for playing muds.  If you don't know what a mud is, you probably don't want to.
+            <br> 
+            If you do, this is a (barebones) client to make it (slightly) easier to play.  Without something like this 
+            you'd need to use telnet or some other  MUD client.  It works by forming a websocket connection to a 
+            server (the owner of which, again, can see everything you type if you use this) which telnets to the mud. 
+            <br>
+            It has some basic mud-client functionality, but it is not as featureful as you would like, and 
+            I don't plan on making it so.  You should save the html/js/css somewhere and tinker with it 
+            yourself to add whatever functionality you need.  I only threw this together in a day or two because 
+            someone else said I couldn't, I will not maintain this!
+            <br><br>
+            Here are some details on what little functionality I have added. Please note these are saved in your 
+            browser (kind of like cookies). 
+            <ul>
+                <li>
+                    <b>Commands: </b> Type stuff in the little box and it gets sent to the mud.  What the mud 
+                    sends back will display in the big box.  You can send multiple commands delimited by a 
+                    semicolon (i.e. if you type "e;smile" you will go east and then smile).
+                </li>
+                <li>
+                    <b>Macros: </b> Macros are basically shortcuts.  If you macro 'la' to 'look at' and then 
+                    enter 'la broom' in the command window, you will send 'look at broom' to the server.  
+                    Macros must be at the beginning of the string.
+                </li>
+                <li>
+                    <b>Aliases: </b> Aliases are like macros, except they are replaced anywhere they appear.  
+                    They are applied after macros.
+                </li>
+                <li>
+                    <b>Substitutions: </b> Simple text replacements applied to output from the game, useful 
+                    for clarity.  Try subbing your name to '<b>Yourname</b>'.  Subbing to <b>GAG</b> will 
+                    omit the entire line.
+                </li>
+                <li>
+                    <b>Triggers: </b> Sends a command whenever the game sends output that matches a regex.  
+                    If you're not familiar with regex, gird your loins and search for "how to regex" or similar.
+                    Triggers are evaluated after substitutions.  '$N' will be replaced by the Nth capture group, 
+                    so try something like triggering '(.*) goes (.*)' to 'say $1 just went $2!'
+                </li>
+            </ul>
+                var macroTooltip = "";
+                var aliasTooltip = "";
+                var subTooltip = "";
+                var triggerTooltip = "";
+                
+        </div>
+    </body>
+</html>
